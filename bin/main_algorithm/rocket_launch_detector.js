@@ -1,10 +1,13 @@
 const WithApi = require('../extern_api/with_api')
 const BisectionAlgorithm = require('../../lib/bisection_algorithm/bisection_algorithm')
 
+// All our strings used in the app
 const strings = require('../utils/strings.json')
+
+//Map with all our clients
 const clients = require('../utils/clients')
 
-const USER_LOST_TIMEOUT = 5000; // 30 seconds
+const USER_LOST_TIMEOUT = 30000; // 30 seconds
 /*
 * RocketLaunchDetector class
 * Contains the main algorithm
@@ -37,7 +40,6 @@ class RocketLaunchDetector {
     * @return {String} Url of the next image
     */
     getNextImageUrl() {
-        console.log("mid " + this.bisection_algorithm.getMid())
         return this.with_api.getVideoFrameUrl(this.bisection_algorithm.getMid());
     }
 
@@ -48,7 +50,6 @@ class RocketLaunchDetector {
     * @return {Object} bisection result
     */
     treatResult(boolValue) {
-        console.log("RocketLaunchDetector - treatResult")
         return this.bisection_algorithm.treatValue(boolValue);
     }
 

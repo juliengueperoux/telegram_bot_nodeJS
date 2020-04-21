@@ -24,13 +24,14 @@ module.exports = function (telegram_bot) {
     telegram_bot.on('message', (msg) => {
         const text = msg.text.toString().toLowerCase();
 
+        // it only treats messages different of '/start'
         if (text != strings.start_command) {
             const rocket_launch_detector = clients.get(msg.chat.id);
             if (rocket_launch_detector) {
-                console.log("message !!!")
                 rocket_launch_detector.onMessage(text);
             }
             else {
+                // the user did not start the test yet
                 telegram_bot.sendMessage(msg.chat.id, strings.unknown_client, {
                     "reply_markup": {
                         "keyboard": [[strings.yes, strings.no]]
