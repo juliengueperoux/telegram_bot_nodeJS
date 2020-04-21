@@ -3,6 +3,7 @@
    "yes" : "oui",
    "no" : "non",
    "unknwon_answer" : "Réponse invalide, elle dit être soit oui ou non",
+   "unknown_client" : "Commencez le test avec la commande /start !",
    "start_command" : "/start",
    "foundValue" : "Nous avons trouvé"
 }

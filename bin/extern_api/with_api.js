@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const axios = require('axios');
 const querystring = require('querystring');
 
@@ -10,15 +12,16 @@ class WithApi {
 
     async getVideoInformations() {
         try {
-            const response = await axios.get(this.baseUrl);
+            const response = await axios.get(this.base_url);
             return response.data;
         } catch (error) {
+            console.log(error)
             return null;
         }
     }
 
-    getVideoFrameUrl(frameId) {
-        return `${this.baseUrl}/frame/${frameId}/`
+    getVideoFrameUrl(frame_id) {
+        return `${this.base_url}/frame/${frame_id}/`
     }
 }
 
