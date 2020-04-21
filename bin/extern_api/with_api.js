@@ -1,16 +1,12 @@
-require('dotenv').config();
-
 const axios = require('axios');
-const querystring = require('querystring');
 
-const base_url = `${process.env.WITH_API_BASE}video/${querystring.escape(process.env.WITH_VIDEO_NAME)}`
-
+const video_url = require('../utils/utils').with_api_video_url
 /*
 * Class interacting with the With Api
 */
 class WithApi {
     constructor() {
-        this.base_url = base_url;
+        this.video_url = video_url;
     }
 
     /*
@@ -18,7 +14,7 @@ class WithApi {
     */
     async getVideoInformations() {
         try {
-            const response = await axios.get(this.base_url);
+            const response = await axios.get(this.video_url);
             return response.data;
         } catch (error) {
             console.log(error)
@@ -33,7 +29,7 @@ class WithApi {
     * @return {String} url to access at the frame
     */
     getVideoFrameUrl(frame_id) {
-        return `${this.base_url}/frame/${frame_id}/`
+        return `${this.video_url}/frame/${frame_id}/`
     }
 }
 

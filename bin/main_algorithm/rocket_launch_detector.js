@@ -7,7 +7,7 @@ const strings = require('../utils/strings.json')
 //Map with all our clients
 const clients = require('../utils/clients')
 
-const USER_LOST_TIMEOUT = 30000; // 30 seconds
+const USER_LOST_TIMEOUT = require('../utils/utils').USER_LOST_TIMEOUT // 30 seconds
 /*
 * RocketLaunchDetector class
 * Contains the main algorithm
