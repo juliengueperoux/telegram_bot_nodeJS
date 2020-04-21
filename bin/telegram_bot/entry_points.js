@@ -5,12 +5,12 @@ const clients = require('../utils/clients');
 
 module.exports = function (telegram_bot) {
 
-
     /*
      * Method called when a suer do the /start command, we create a new RocketLaunchDetector and launch the discussion
      */
     telegram_bot.onText(/\/start/, async (msg) => {
 
+        // Each user has his own RocketLaunchDetector
         const rocket_launch_detector = new RocketLaunchDetector(telegram_bot, msg.chat.id);
         rocket_launch_detector.onStartMessage();
 

@@ -7,12 +7,17 @@ const strings = require('../utils/strings.json')
 //Map with all our clients
 const clients = require('../utils/clients')
 
-const USER_LOST_TIMEOUT = require('../utils/utils').USER_LOST_TIMEOUT // 30 seconds
+// utils variables 
+const utils = require('../utils/utils')
+
+const log = require('../../lib/log')
+
 /*
 * RocketLaunchDetector class
 * Contains the main algorithm
 */
 class RocketLaunchDetector {
+
     constructor(telegram_bot, chat_id) {
         this.bisection_algorithm = null;
         this.telegram_bot = telegram_bot
@@ -23,15 +28,20 @@ class RocketLaunchDetector {
 
     /**
     * Initialize the rocket launch detector, get video informations
-    *
+    * @return {Boolean} Success of initialization
     */
     async init() {
-        this.with_api = new WithApi();
+        this.with_api = new WithApi(utils.WITH_API_VIDEO_URL);
         const video_informations = await this.with_api.getVideoInformations();
+        if(!video_informations){
+            return false;
+        }
         this.bisection_algorithm = new BisectionAlgorithm(video_informations);
         // user lost timeout creation
-        this.user_lost_timeout = setTimeout(this.onUserLost, USER_LOST_TIMEOUT, this.chat_id);
-
+        this.user_lost_timeout = setTimeout(this.destroy, utils.USER_LOST_TIMEOUT, this.chat_id);
+        
+        log.info(`RocketLaunchDetector init done (chat_id: ${this.chat_id})`);
+        return true;
     }
 
     /**
@@ -50,13 +60,16 @@ class RocketLaunchDetector {
     * @return {Object} bisection result
     */
     treatResult(boolValue) {
+        log.info(`RocketLaunchDetector treatResult : ${boolValue} (chat_id: ${this.chat_id})`);
         return this.bisection_algorithm.treatValue(boolValue);
     }
 
     /*
-    * Method called when we have lost the user
+    * Method called when we want to destory the object
+    (we delete the only thing referencing the object)
     */
-    onUserLost = function(chat_id){
+    destroy = function(chat_id){
+        log.info(`RocketLaunchDetector destroy (chat_id: ${chat_id})`);
         clients.delete(chat_id)
     }
 
@@ -64,10 +77,13 @@ class RocketLaunchDetector {
     * Method called when a '/start' message is received
     */
     async onStartMessage() {
-
-        await this.init();
+        const init_success = await this.init();
+        if(!init_success){
+            log.error(`RocketLaunchDetector onStartMessage error init failed (chat_id: ${this.chat_id})`);
+            this.errorOccured();
+            return;
+        }
         this.telegram_bot.sendPhoto(this.chat_id, this.getNextImageUrl());
-
         this.telegram_bot.sendMessage(this.chat_id, strings.question, {
             "reply_markup": {
                 "keyboard": [[strings.yes, strings.no]]
@@ -90,6 +106,7 @@ class RocketLaunchDetector {
             result = this.treatResult(false);
         }
         else {
+            log.info(`RocketLaunchDetector onMessage - Unknown message : ${text} (chat_id: ${this.chat_id})`);
             if (text != strings.start_command)
                 this.telegram_bot.sendMessage(this.chat_id, strings.unknwon_answer, {
                     "reply_markup": {
@@ -99,6 +116,7 @@ class RocketLaunchDetector {
             return;
         }
         if (result != null) {
+            log.info(`RocketLaunchDetector onMessage - value found : ${result} (chat_id: ${this.chat_id})`);
             const url = this.getNextImageUrl();
 
             this.telegram_bot.sendMessage(this.chat_id, strings.foundValue +" "+ result);
@@ -116,11 +134,20 @@ class RocketLaunchDetector {
         }
     }
 
+    errorOccured(){
+        log.error(`RocketLaunchDetector errorOccured - (chat_id: ${this.chat_id})`);
+        this.telegram_bot.sendMessage(this.chat_id, strings.abort_detection);
+        this.destroy();
+    }
+
+
+
     /*
     * Reset user_lost_timeout
     */
     resetUserLost(){
-        this.user_lost_timeout = setTimeout(this.onUserLost, USER_LOST_TIMEOUT, this.chat_id);
+        clearTimeout(this.user_lost_timeout)
+        this.user_lost_timeout = setTimeout(this.destroy, utils.USER_LOST_TIMEOUT, this.chat_id);
     }
 }
 

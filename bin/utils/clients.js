@@ -1,4 +1,3 @@
-
 /*
 * Map containg all our clients
 */

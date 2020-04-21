@@ -1,5 +1,6 @@
 {
-   "question" : "Did the rocket launch yet?",
+   "question" : "La fusée a-t-elle décollée ?",
+   "abort_detection" :"Une erreur est survenue, la detection est annulée",
    "yes" : "oui",
    "no" : "non",
    "unknwon_answer" : "Réponse invalide, elle dit être soit oui ou non",

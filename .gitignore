@@ -1,2 +1,7 @@
 .env
 node_modules
+
+
+# exclude every log
+log_files/*
+!log_files/.gitkeep 

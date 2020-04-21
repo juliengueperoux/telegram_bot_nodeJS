@@ -1,11 +1,12 @@
 const axios = require('axios');
 
-const video_url = require('../utils/utils').with_api_video_url
+const log = require('../../lib/log')
+
 /*
 * Class interacting with the With Api
 */
 class WithApi {
-    constructor() {
+    constructor(video_url) {
         this.video_url = video_url;
     }
 
@@ -17,7 +18,8 @@ class WithApi {
             const response = await axios.get(this.video_url);
             return response.data;
         } catch (error) {
-            console.log(error)
+            log.error("Error: "+error)
+            console.log("Error: "+error)
             return null;
         }
     }
