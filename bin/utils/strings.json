@@ -1,0 +1,8 @@
+{
+   "question" : "Did the rocket launch yet?",
+   "yes" : "oui",
+   "no" : "non",
+   "unknwon_answer" : "Réponse invalide, elle dit être soit oui ou non",
+   "start_command" : "/start",
+   "foundValue" : "Nous avons trouvé"
+}
