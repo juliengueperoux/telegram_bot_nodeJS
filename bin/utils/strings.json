@@ -3,7 +3,7 @@
    "abort_detection" :"Une erreur est survenue, la detection est annulée",
    "yes" : "oui",
    "no" : "non",
-   "unknwon_answer" : "Réponse invalide, elle dit être soit oui ou non",
+   "unknwon_answer" : "Réponse invalide, elle doit être soit 'oui' soit 'non'",
    "unknown_client" : "Commencez le test avec la commande /start !",
    "start_command" : "/start",
    "foundValue" : "Nous avons trouvé"

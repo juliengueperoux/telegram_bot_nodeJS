@@ -3,6 +3,8 @@ const strings = require('../utils/strings.json')
 
 const clients = require('../utils/clients');
 
+const telegram_bot_send_response_function = require('./utils').sendResponse
+
 module.exports = function (telegram_bot) {
 
     /*
@@ -12,9 +14,11 @@ module.exports = function (telegram_bot) {
 
         // Each user has his own RocketLaunchDetector
         const rocket_launch_detector = new RocketLaunchDetector(telegram_bot, msg.chat.id);
-        rocket_launch_detector.onStartMessage();
-
         clients.set(msg.chat.id, rocket_launch_detector)
+
+        const response = await rocket_launch_detector.onStartMessage();
+        telegram_bot_send_response_function(telegram_bot, msg.chat.id, response);
+
     });
 
 
@@ -28,15 +32,13 @@ module.exports = function (telegram_bot) {
         if (text != strings.start_command) {
             const rocket_launch_detector = clients.get(msg.chat.id);
             if (rocket_launch_detector) {
-                rocket_launch_detector.onMessage(text);
+                const response = rocket_launch_detector.onMessage(text);
+                telegram_bot_send_response_function(telegram_bot, msg.chat.id, response);
             }
             else {
                 // the user did not start the test yet
-                telegram_bot.sendMessage(msg.chat.id, strings.unknown_client, {
-                    "reply_markup": {
-                        "keyboard": [[strings.yes, strings.no]]
-                    }
-                });
+                const response = [{ type: "message", value: strings.unknown_client }]
+                telegram_bot_send_response_function(telegram_bot, msg.chat.id, response);
             }
         }
     });
