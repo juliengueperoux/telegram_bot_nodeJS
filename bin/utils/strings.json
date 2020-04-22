@@ -1,4 +1,5 @@
 {
+   "start_message" :"Bonjour et bienvenue,\n\nPour lancer le test, écrivez la commande /go\nLes réponses acceptées lors du test sont \"oui\" ou \"non\"",
    "question" : "La fusée a-t-elle décollée ?",
    "abort_detection" :"Une erreur est survenue, la detection est annulée",
    "yes" : "oui",
@@ -6,5 +7,8 @@
    "unknwon_answer" : "Réponse invalide, elle doit être soit 'oui' soit 'non'",
    "unknown_client" : "Commencez le test avec la commande /start !",
    "start_command" : "/start",
-   "foundValue" : "Nous avons trouvé"
+   "go_command" : "/go",
+   "found_value" : "Nous avons trouvé",
+   "user_lost" : "Continuez le test en répondant à la question !",
+   "destroy" : "Test arrêté, au revoir !"
 }
