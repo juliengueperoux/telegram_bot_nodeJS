@@ -39,7 +39,7 @@ class TestContext {
         this.withApi = new WithApi(utils.WITH_API_VIDEO_URL);
 
         const videoInformations = await this.withApi.getVideoInformations();
-        if (!videoInformations) {
+        if (!videoInformations || !videoInformations.frames > 0) {
             log.warn(`TestContext init error, no videoInformations(testCtxId: ${this.testCtxId})`);
             this.eventBus.emit("response", null, this.testCtxId, [{ type: "message", value: strings.abort_detection }])
             this.errorOccured();
@@ -47,7 +47,7 @@ class TestContext {
         }
         else {
             this.initalized = true;
-            this.bisectionAlgorithm = new BisectionAlgorithm(videoInformations);
+            this.bisectionAlgorithm = new BisectionAlgorithm(videoInformations.frames);
             log.debug(`TestContext init done (testCtxId: ${this.testCtxId})`);
             return true;
         }

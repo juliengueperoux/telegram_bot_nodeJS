@@ -18,7 +18,7 @@ class WithApi {
             return response.data;
         } catch (error) {
             log.warn("WithApi - getVideoInformations - Error: "+error)
-            return null;
+            return {};
         }
     }
 
