@@ -17,3 +17,4 @@ exports.sendResponse = (telegram_bot, chat_id, response) => {
         }
     })
 }
+

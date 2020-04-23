@@ -6,9 +6,12 @@
    "no" : "non",
    "unknwon_answer" : "Réponse invalide, elle doit être soit 'oui' soit 'non'",
    "unknown_client" : "Commencez le test avec la commande /start !",
-   "start_command" : "/start",
-   "go_command" : "/go",
    "found_value" : "Nous avons trouvé",
+   "terminated_test" : "Test terminé !",
    "user_lost" : "Continuez le test en répondant à la question !",
-   "destroy" : "Test arrêté, au revoir !"
+   "destroy" : "Au revoir !",
+
+   "cancel_command" : "/cancel",
+   "start_command" : "/start",
+   "go_command" : "/go"
 }

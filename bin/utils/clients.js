@@ -3,13 +3,13 @@
 */
 let Clients = module.exports = {
     clients: new Map(),
-    set: function (chat_id, rocket_launch_detector) {
-        Clients.clients.set(chat_id, rocket_launch_detector);
+    set: function (chatId, testContext) {
+        Clients.clients.set(chatId, testContext);
     },
-    delete: function (chat_id) {
-        Clients.clients.delete(chat_id);
+    delete: function (chatId) {
+        Clients.clients.delete(chatId);
     },
-    get: function (chat_id) {
-        return Clients.clients.get(chat_id);
+    get: function (chatId) {
+        return Clients.clients.get(chatId);
     }
 }

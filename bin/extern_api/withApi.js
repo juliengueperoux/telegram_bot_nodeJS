@@ -5,8 +5,8 @@ const log = require('../../lib/log')
 * Class interacting with the With Api
 */
 class WithApi {
-    constructor(video_url) {
-        this.video_url = video_url;
+    constructor(videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     /*
@@ -14,11 +14,10 @@ class WithApi {
     */
     async getVideoInformations() {
         try {
-            const response = await axios.get(this.video_url);
+            const response = await axios.get(this.videoUrl);
             return response.data;
         } catch (error) {
-            log.error("Error: "+error)
-            console.log("Error: "+error)
+            log.warn("WithApi - getVideoInformations - Error: "+error)
             return null;
         }
     }
@@ -26,11 +25,11 @@ class WithApi {
     /**
     * Retrieve the url to get the specified frame from the video
     *
-    * @param  {Number} frame_id frame identifier
+    * @param  {Number} frameId frame identifier
     * @return {String} url to access at the frame
     */
-    getVideoFrameUrl(frame_id) {
-        return `${this.video_url}/frame/${frame_id}/`
+    getVideoFrameUrl(frameId) {
+        return `${this.videoUrl}/frame/${frameId}/`
     }
 }
 
