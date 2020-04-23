@@ -6,12 +6,12 @@ This server communicates with a telegram bot to make collaborate the user and a 
   
 ### 2 distinct parts:
 
-**Lib folder** : containing all non-specific development
+**Lib folder** : containing all non-specific development :
 * Binary search algorithm
 * Log file initialization
 * Event bus initialization
     
-**Bin folder** : Specific development:
+**Bin folder** : Specific development :
 * extern_api : wrapper of the video API
 * telegram_bot : wrapper of the telegram bot
 * test_context : main part, contain all the logic
