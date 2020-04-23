@@ -1,5 +1,5 @@
 {
-   "start_message" :"Bonjour et bienvenue,\n\nPour lancer le test, écrivez la commande /go\nLes réponses acceptées lors du test sont \"oui\" ou \"non\"",
+   "start_message" :"Bonjour et bienvenue,\n\nPour lancer le test, écrivez la commande /go\nLes réponses acceptées lors du test sont \"oui\" ou \"non\".\nAu cours du test, vous pouvez annuler en effectuant la commande /cancel",
    "question" : "La fusée a-t-elle décollée ?",
    "abort_detection" :"Une erreur est survenue, la detection est annulée",
    "yes" : "oui",

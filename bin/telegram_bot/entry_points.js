@@ -1,6 +1,6 @@
 const TestContext = require('../test_context/testContext');
 const clients = require('../utils/clients');
-const eventBus = require("../utils/eventBus")
+const eventBus = require("../../lib/event_bus/eventBus")
 
 module.exports = function (telegramBot) {
     /*

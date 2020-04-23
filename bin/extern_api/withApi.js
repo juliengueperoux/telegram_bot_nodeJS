@@ -1,5 +1,5 @@
 const axios = require('axios');
-const log = require('../../lib/log')
+const log = require('../../lib/log/log')
 
 /*
 * Class interacting with the With Api
