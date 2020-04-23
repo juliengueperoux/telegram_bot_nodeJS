@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start" :"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,8 @@
     "js-event-bus": "^1.0.1",
     "node-telegram-bot-api": "^0.40.0",
     "simple-node-logger": "^18.12.24"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
   }
 }
