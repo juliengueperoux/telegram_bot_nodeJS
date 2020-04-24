@@ -25,7 +25,7 @@ In order to send messages to the telegram bot every time we want, an event bus d
 	* Separation between specific and non-specific
 	* Separation between interface specific and the rest
 3. Log files that allow you to quickly find any problem
-4. Some other prerequisite to write maintainable code :
+4. Some others prerequisites to write maintainable code :
    * Write comments on every possible difficult code understanding
    * Explicit names of methods, variables and classes
    * Think that you could have to read your code in a very long time
